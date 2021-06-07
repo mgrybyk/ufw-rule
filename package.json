@@ -1,0 +1,62 @@
+{
+  "name": "ufw-rule",
+  "version": "1.0.0",
+  "description": "Manage ufw rules",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "scripts": {
+    "start": "node lib/index.js",
+    "build": "run-s clean compile",
+    "clean": "rimraf ./lib",
+    "compile-dev": "tsc --build tsconfig.build.json --incremental",
+    "compile": "tsc --build tsconfig.prod.json",
+    "test": "jest",
+    "lint": "eslint --ext .ts --ignore-path .gitignore .",
+    "lint-fix": "npm run lint -- --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "run-s build lint",
+      "pre-push": "run-s test"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mgrybyk/ufw-rule.git"
+  },
+  "keywords": [
+    "node",
+    "ufw"
+  ],
+  "devDependencies": {
+    "@types/express": "^4.17.12",
+    "@types/hapi__joi": "^17.1.6",
+    "@types/jest": "^26.0.23",
+    "@typescript-eslint/eslint-plugin": "^4.26.1",
+    "@typescript-eslint/parser": "^4.26.1",
+    "eslint": "^7.28.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "get-port": "^5.1.1",
+    "got": "^11.8.2",
+    "husky": "^6.0.0",
+    "jest": "^27.0.4",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.3.2"
+  },
+  "dependencies": {
+    "@cloudnative/health-connect": "^2.1.0",
+    "@hapi/joi": "^17.1.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "http-status": "^1.5.0",
+    "winston": "^3.3.3"
+  }
+}
