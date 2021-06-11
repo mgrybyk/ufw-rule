@@ -1,15 +1,44 @@
+import Joi from 'joi'
 import { Router } from 'express'
+import { addRule } from '../../components/ufw-cli/ufw'
+import { asyncHandler } from '../../middlewares/asyncHandler'
 
 export const ufwRoute = Router()
 
-ufwRoute.get('/rule-list', (req, res) => {
-    res.end('rule-list')
+const addRuleSchema = Joi.object({
+    type: Joi.string().required().valid('allow', 'deny'),
+    ipFrom: Joi.string(),
+    ipTo: Joi.string(),
+    port: Joi.string(),
+    proto: Joi.string(),
+}).or('ipFrom', 'ipTo', 'port', 'proto')
+
+const removeRuleSchema = Joi.object({
+    to: Joi.string().required(),
+    action: Joi.string().required(),
+    from: Joi.string().required(),
 })
 
-ufwRoute.post('/rule-add', (req, res) => {
-    res.end('rule-add')
+ufwRoute.get('/rule-list', (req, res) => {
+    res.status(501).end({ error: 'not implemented' })
 })
+
+ufwRoute.post(
+    '/rule-add',
+    asyncHandler(async (req, res) => {
+        const { value, error } = addRuleSchema.validate(req.body)
+        if (error) {
+            throw error
+        }
+        const r = await addRule(value)
+        res.end(r)
+    })
+)
 
 ufwRoute.post('/rule-remove', (req, res) => {
-    res.end('rule-remove')
+    const { error } = removeRuleSchema.validate(req.body)
+    if (error) {
+        throw error
+    }
+    res.status(501).end({ error: 'not implemented' })
 })

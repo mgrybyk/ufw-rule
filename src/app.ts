@@ -1,10 +1,11 @@
 import express from 'express'
-import * as httpStatus from 'http-status'
+import httpStatus from 'http-status'
 import { HealthEndpoint, LivenessEndpoint, ReadinessEndpoint } from './middlewares/health'
 
 import { routes } from './routes/v1/index'
 import { ApiError } from './error'
 import { errorConverter, errorHandler } from './middlewares/error'
+import config from './config/config'
 
 export const app = express()
 
@@ -17,6 +18,16 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/health/liveness', LivenessEndpoint)
 app.use('/health/readiness', ReadinessEndpoint)
 app.use('/health', HealthEndpoint)
+
+app.use((req, res, next) => {
+    if (!req.headers.authorization) {
+        return res.status(403).send()
+    }
+    if (req.headers.authorization !== config.authToken) {
+        return res.status(401).send()
+    }
+    next()
+})
 
 // v1 api routes
 app.use('/v1', routes)

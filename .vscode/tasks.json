@@ -5,10 +5,10 @@
     "tasks": [
         {
             "type": "npm",
-            "script": "compile",
+            "script": "compile-dev",
             "group": "build",
             "problemMatcher": [],
-            "label": "npm: compile",
+            "label": "npm: compile-dev",
             "detail": "tsc --incremental"
         }
     ]

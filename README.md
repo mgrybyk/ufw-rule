@@ -16,6 +16,7 @@ TODO
 ```
 # SERVER
 PORT=8230
+AUTH_TOKEN=set your auth token!
 ```
 
 Environment variables are processed in [config](./src/config/config.ts).
@@ -24,8 +25,17 @@ It's also possible to use [.env](https://www.npmjs.com/package/dotenv) file for 
 ## Endpoints
 
 - POST `/v1/ufw/rule-add`
-- POST `/v1/ufw/rule-remove`
-- GET `/v1/ufw/rule-list`
+```
+{
+    "type": "allow" | "deny",
+    "ipFrom"?: "1.2.3.4",
+    "ipTo"?: "4.3.2.1",
+    "port"?: "853",
+    "proto?": "tcp"
+}
+```
+- POST `/v1/ufw/rule-remove` NOT IMPLEMENTED
+- GET `/v1/ufw/rule-list` NOT IMPLEMENTED
 
 ### Health Check
 

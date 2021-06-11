@@ -1,12 +1,13 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config()
 
-import * as Joi from '@hapi/joi'
+import Joi from 'joi'
 
 const envVarsSchema = Joi.object()
     .keys({
         NODE_ENV: Joi.string().valid('production', 'development', 'test').default('development'),
         PORT: Joi.number().default(8230),
+        AUTH_TOKEN: Joi.string().required(),
     })
     .unknown()
 
@@ -19,4 +20,5 @@ if (error) {
 export default {
     env: envVars.NODE_ENV,
     port: envVars.PORT,
+    authToken: envVars.AUTH_TOKEN,
 }

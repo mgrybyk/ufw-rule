@@ -34,7 +34,6 @@
   ],
   "devDependencies": {
     "@types/express": "^4.17.12",
-    "@types/hapi__joi": "^17.1.6",
     "@types/jest": "^26.0.23",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",
@@ -53,10 +52,10 @@
   },
   "dependencies": {
     "@cloudnative/health-connect": "^2.1.0",
-    "@hapi/joi": "^17.1.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "http-status": "^1.5.0",
+    "joi": "^17.4.0",
     "winston": "^3.3.3"
   }
 }

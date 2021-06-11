@@ -1,6 +1,6 @@
 import { Request, NextFunction, Response } from 'express'
 
-import * as httpStatus from 'http-status'
+import httpStatus from 'http-status'
 import { logger } from '../config/logger'
 import { ApiError } from '../error'
 
