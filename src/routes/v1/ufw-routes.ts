@@ -34,7 +34,7 @@ ufwRoute.post(
             value.ipFrom = req.headers['x-forwarded-for'] || req.socket.remoteAddress
         }
         const r = await addRule(value)
-        res.end(r)
+        res.json(r)
     })
 )
 
