@@ -30,6 +30,9 @@ ufwRoute.post(
         if (error) {
             throw error
         }
+        if (value.ipFrom === '$remoteIp') {
+            value.ipFrom = req.headers['x-forwarded-for'] || req.socket.remoteAddress
+        }
         const r = await addRule(value)
         res.end(r)
     })
