@@ -29,7 +29,7 @@ export const addRule = async ({
     } else if (output === 'Skipping adding existing rule') {
         result = {
             success: true,
-            updated: true,
+            skipped: true,
         }
     } else {
         throw new Error(output)
