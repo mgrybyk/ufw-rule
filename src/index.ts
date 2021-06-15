@@ -4,8 +4,8 @@ import { logger } from './config/logger'
 
 logger.info(`Running in '${config.env}' mode`)
 
-const server = app.listen(config.port, () => {
-    logger.info(`Listening to port ${config.port}`)
+const server = app.listen(config.port, config.serverHost, () => {
+    logger.info(`Listening to port ${config.serverHost}:${config.port}`)
 })
 
 const unexpectedErrorHandler = (error: Error) => {

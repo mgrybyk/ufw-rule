@@ -14,7 +14,7 @@ describe('main', () => {
 
     it('should run server on proper port', () => {
         expect(expressSpy).toBeCalledTimes(1)
-        expect(expressSpy).toBeCalledWith(config.port, expect.any(Function))
+        expect(expressSpy).toBeCalledWith(config.port, '127.0.0.1', expect.any(Function))
     })
 
     it('should response to liveness health check', async () => {
