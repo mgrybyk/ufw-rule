@@ -34,6 +34,9 @@ ufwRoute.post(
         if (value.ipFrom === '$remoteIp') {
             remoteIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress
             value.ipFrom = remoteIp
+        } else if (value.ipFrom === '$remoteIpRange') {
+            remoteIp = (req.headers['x-forwarded-for'] || req.socket.remoteAddress) as string
+            value.ipFrom = remoteIp.substr(0, remoteIp.lastIndexOf('.')) + '.0/24'
         }
         const r = await addRule(value)
         res.json(remoteIp ? { ...r, remoteIp } : r)
